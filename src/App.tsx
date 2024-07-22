@@ -1,11 +1,9 @@
-import './App.css'
-import LoginForm from "./components/LoginForm.tsx";
-import UserList from "./components/UserList.tsx";
+import "./App.css"
+import LoginForm from "./components/login/LoginForm.tsx"
+import UserList from "./components/UserList.tsx"
 
 export default function App() {
-    const isLoggedIn = false;
+  const isLoggedIn = false
 
-    return isLoggedIn
-        ? (<><UserList /></>)
-        : (<><LoginForm /></>)
+  return isLoggedIn ? <UserList /> : <LoginForm />
 }

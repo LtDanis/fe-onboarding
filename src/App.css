@@ -2,5 +2,7 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
+
+  --main-orange: rgb(255, 140, 0);
+  --hover-orange: rgb(255, 100, 0);
 }
