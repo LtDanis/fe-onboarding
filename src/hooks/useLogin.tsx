@@ -1,7 +1,8 @@
 import { FormEventHandler, useState } from "react"
 
 export default function useLogin() {
-  const [loggedIn, setLoggedIn] = useState(false)
+  const currentState = Boolean(localStorage.getItem("accessToken"))
+  const [loggedIn, setLoggedIn] = useState(currentState)
   const [state, setState] = useState("")
 
   const LOGIN_URL = "http://localhost:3002/auth/login"
