@@ -5,6 +5,7 @@ type FormInputProps = {
   name: string
   type: string
   placeholder: string
+  state: string
 }
 
 export default function FormInput({
@@ -12,6 +13,7 @@ export default function FormInput({
   name,
   type,
   placeholder,
+  state,
 }: FormInputProps) {
   return (
     <>
@@ -23,6 +25,7 @@ export default function FormInput({
           name={name}
           placeholder={placeholder}
           required
+          disabled={state === "loading"}
         />
       </div>
     </>

@@ -9,3 +9,10 @@
     border-style: solid;
     border-width: 1px;
 }
+
+.form-error {
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    padding: 10px 20px;
+}

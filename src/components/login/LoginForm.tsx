@@ -4,17 +4,13 @@ import Button from "./Button.tsx"
 import CommandLineSvg from "../../assets/CommandLine.tsx"
 import { FormEventHandler } from "react"
 
-export default function LoginForm() {
-  const onSignIn: FormEventHandler<HTMLFormElement> = (form) => {
-    form.preventDefault()
-    const formData = new FormData(form.currentTarget)
-    const username = formData.get("username")
-    const password = formData.get("password")
-
-    console.log(username)
-    console.log(password)
-  }
-
+export default function LoginForm({
+  onSignIn,
+  state,
+}: {
+  onSignIn: FormEventHandler
+  state: string
+}) {
   return (
     <div className="flex flex-col min-w-[350px] login-form">
       <h1 className="text-xl flex">
@@ -23,12 +19,20 @@ export default function LoginForm() {
       </h1>
       <form className="form-input" action="" onSubmit={onSignIn}>
         <div className="p-5 form-header">Log In</div>
+        {state === "error" ? (
+          <div className="form-error">
+            ⚠ Username or password is incorrect{" "}
+          </div>
+        ) : (
+          ""
+        )}
 
         <FormInput
           id={"username"}
           name={"username"}
           type={"text"}
           placeholder={"Username"}
+          state={state}
         />
 
         <FormInput
@@ -36,9 +40,10 @@ export default function LoginForm() {
           name={"password"}
           type={"password"}
           placeholder={"Password"}
+          state={state}
         />
 
-        <Button title={"Log In"} />
+        <Button title={"Log In"} state={state} />
       </form>
     </div>
   )
