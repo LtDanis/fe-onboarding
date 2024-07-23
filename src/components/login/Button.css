@@ -1,0 +1,11 @@
+.button {
+    padding: 7px 15px;
+    margin: 5px;
+    background-color: var(--main-orange);
+    color: white;
+}
+
+.button:hover {
+    background-color: var(--hover-orange);
+    transition-duration: 0.3s;
+}
