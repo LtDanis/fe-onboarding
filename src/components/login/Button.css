@@ -9,3 +9,27 @@
     background-color: var(--hover-orange);
     transition-duration: 0.3s;
 }
+
+.disabled-button {
+    padding: 7px 15px;
+    margin: 5px;
+    background-color: var(--hover-orange);
+    color: white;
+
+    display: flex;
+    align-items: center;
+}
+
+.loader {
+    border: 2px solid #8e8e8e;
+    border-top: 2px solid #ffffff;
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
