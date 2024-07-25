@@ -1,14 +1,15 @@
 import { FormEventHandler, useState } from "react"
+import { LOGIN_STATE } from "../enum.tsx"
 
 export default function useLogin() {
   const currentState = Boolean(localStorage.getItem("accessToken"))
   const [loggedIn, setLoggedIn] = useState(currentState)
-  const [state, setState] = useState("")
+  const [state, setState] = useState(LOGIN_STATE.none)
 
   const LOGIN_URL = "http://localhost:3002/auth/login"
 
   const onSignIn: FormEventHandler<HTMLFormElement> = (form) => {
-    setState("loading")
+    setState(LOGIN_STATE.loading)
     form.preventDefault()
     const formData = new FormData(form.currentTarget)
     const username = formData.get("username")
@@ -24,7 +25,9 @@ export default function useLogin() {
     }
     fetch(LOGIN_URL, requestOptions)
       .then((res) => {
-        res.status === 200 ? setState("success") : setState("error")
+        res.status === 200
+          ? setState(LOGIN_STATE.success)
+          : setState(LOGIN_STATE.error)
         return res.json()
       })
       .then((data) => {

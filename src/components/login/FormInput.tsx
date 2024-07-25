@@ -1,11 +1,12 @@
 import "./FormInput.css"
+import { LOGIN_STATE } from "../../enum.tsx"
 
 type FormInputProps = {
   id: string
   name: string
   type: string
   placeholder: string
-  state: string
+  state: LOGIN_STATE
 }
 
 export default function FormInput({
@@ -25,7 +26,7 @@ export default function FormInput({
           name={name}
           placeholder={placeholder}
           required
-          disabled={state === "loading"}
+          disabled={state === LOGIN_STATE.loading}
         />
       </div>
     </>

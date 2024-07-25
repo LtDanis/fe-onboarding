@@ -1,6 +1,11 @@
 import "./Layout.css"
 import { Link, Outlet, useNavigate } from "react-router-dom"
 import { useEffect } from "react"
+import CommandLineSvg from "../../assets/CommandLine.tsx"
+import UserSvg from "../../assets/User.tsx"
+import FriendsSvg from "../../assets/Friends.tsx"
+import LogoutSvg from "../../assets/Logout.tsx"
+import PositionSvg from "../../assets/Position.tsx"
 
 export default function Layout({
   loggedIn,
@@ -17,27 +22,47 @@ export default function Layout({
   }
   return (
     <>
-      <nav>
-        <ul>
-          <li>
-            <Link to="/user">Users</Link>
-          </li>
-          <li>
-            <Link to="/departments">Departments</Link>
-          </li>
-          <li>
-            <Link to="/positions">Positions</Link>
-          </li>
+      <div className="flex flex-row">
+        <div className="flex menu-bar">
+          <nav>
+            <div className="flex flex-row">
+              <CommandLineSvg />
+              &nbsp;OnBoarding
+            </div>
+            <ul>
+              <li>
+                <Link to="/users" className="flex flex-row">
+                  <UserSvg />
+                  &nbsp;Users
+                </Link>
+              </li>
+              <li>
+                <Link to="/departments" className="flex flex-row">
+                  <FriendsSvg />
+                  &nbsp;Departments
+                </Link>
+              </li>
+              <li>
+                <Link to="/positions" className="flex flex-row">
+                  <PositionSvg />
+                  &nbsp;Positions
+                </Link>
+              </li>
 
-          <li>
-            <Link to="/" onClick={handleLogout}>
-              Log out
-            </Link>
-          </li>
-        </ul>
-      </nav>
+              <li>
+                <Link to="/" className="flex flex-row" onClick={handleLogout}>
+                  <LogoutSvg />
+                  &nbsp;Log out
+                </Link>
+              </li>
+            </ul>
+          </nav>
+        </div>
 
-      <Outlet />
+        <div className="flex">
+          <Outlet />
+        </div>
+      </div>
     </>
   )
 }
