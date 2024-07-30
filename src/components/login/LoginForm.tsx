@@ -2,20 +2,16 @@ import "./LoginForm.css"
 import FormInput from "./FormInput.tsx"
 import Button from "./Button.tsx"
 import CommandLineSvg from "../../assets/CommandLine.tsx"
-import { FormEventHandler, useEffect } from "react"
+import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { LOGIN_STATE } from "../../data/enum.tsx"
 import useUser from "../../hooks/useUser.tsx"
+import useLogin from "../../hooks/useLogin.tsx"
 
-export default function LoginForm({
-  onSignIn,
-  redirectTo,
-}: {
-  onSignIn: FormEventHandler
-  redirectTo: string
-}) {
+export default function LoginForm({ redirectTo }: { redirectTo: string }) {
   const { token, loginState } = useUser()
   const navigate = useNavigate()
+  const { onSignIn } = useLogin()
 
   useEffect(() => {
     if (token) {

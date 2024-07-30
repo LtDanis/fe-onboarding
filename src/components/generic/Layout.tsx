@@ -8,9 +8,11 @@ import LogoutSvg from "../../assets/Logout.tsx"
 import PositionSvg from "../../assets/Position.tsx"
 import useUser from "../../hooks/useUser.tsx"
 import { LOGIN_URL } from "../../data/constants.tsx"
+import useLogin from "../../hooks/useLogin.tsx"
 
-export default function Layout({ handleLogout }: { handleLogout: () => void }) {
+export default function Layout() {
   const navigate = useNavigate()
+  const { handleLogout } = useLogin()
   const { token } = useUser()
   useEffect(() => {
     if (!token) {
