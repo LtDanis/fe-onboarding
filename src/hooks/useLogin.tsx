@@ -1,16 +1,24 @@
-import { FormEventHandler, useState } from "react"
-import { LOGIN_STATE } from "../enum.tsx"
+import { FormEventHandler } from "react"
+import { BASE_URL } from "../data/constants.tsx"
+import { useNavigate } from "react-router-dom"
+import useUser from "./useUser.tsx"
+import { LOGIN_STATE } from "../data/enum.tsx"
+
+//should be deleted on real app
+async function delayToSeeLoader(ms: number) {
+  const delay = async (ms: number) => new Promise((res) => setTimeout(res, ms))
+  await delay(ms)
+}
 
 export default function useLogin() {
-  const currentState = Boolean(localStorage.getItem("accessToken"))
-  const [loggedIn, setLoggedIn] = useState(currentState)
-  const [state, setState] = useState(LOGIN_STATE.none)
+  const navigate = useNavigate()
+  const userStore = useUser()
+  const LOGIN_URL = BASE_URL + "/auth/login"
 
-  const LOGIN_URL = "http://localhost:3002/auth/login"
-
-  const onSignIn: FormEventHandler<HTMLFormElement> = (form) => {
-    setState(LOGIN_STATE.loading)
+  const onSignIn: FormEventHandler<HTMLFormElement> = async (form) => {
+    userStore.login(LOGIN_STATE.loading, null)
     form.preventDefault()
+
     const formData = new FormData(form.currentTarget)
     const username = formData.get("username")
     const password = formData.get("password")
@@ -23,26 +31,25 @@ export default function useLogin() {
         password: password,
       }),
     }
-    fetch(LOGIN_URL, requestOptions)
-      .then((res) => {
-        res.status === 200
-          ? setState(LOGIN_STATE.success)
-          : setState(LOGIN_STATE.error)
-        return res.json()
-      })
-      .then((data) => {
-        const access = data.access_token
-        if (access) {
-          localStorage.setItem("accessToken", access)
-          setLoggedIn(true)
-        }
-      })
+
+    const data = await fetch(LOGIN_URL, requestOptions)
+
+    const access = await data.json()
+    const token = access.access_token
+
+    if (token) {
+      await delayToSeeLoader(700)
+      userStore.login(LOGIN_STATE.success, token)
+      navigate("/users")
+    } else {
+      userStore.login(LOGIN_STATE.error, null)
+    }
   }
 
   const handleLogout = () => {
-    localStorage.removeItem("accessToken")
-    setLoggedIn(false)
+    userStore.logout()
+    navigate(LOGIN_URL)
   }
 
-  return { onSignIn, handleLogout, loggedIn, state }
+  return { onSignIn, handleLogout }
 }

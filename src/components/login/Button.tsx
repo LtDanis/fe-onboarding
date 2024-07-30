@@ -1,15 +1,16 @@
 import "./Button.css"
-import { LOGIN_STATE } from "../../enum.tsx"
+import { LOGIN_STATE } from "../../data/enum.tsx"
+import useUser from "../../hooks/useUser.tsx"
 
 type ButtonInput = {
   title: string
-  state: LOGIN_STATE
 }
 
-export default function Button({ title, state }: ButtonInput) {
+export default function Button({ title }: ButtonInput) {
+  const { loginState } = useUser()
   return (
     <>
-      {state === LOGIN_STATE.loading ? (
+      {loginState === LOGIN_STATE.loading ? (
         <div className="wrap">
           <button type="button" disabled className="disabled-button">
             <div className="loader"></div>

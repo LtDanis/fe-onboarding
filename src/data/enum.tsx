@@ -1,4 +1,4 @@
-export const enum LOGIN_STATE {
+export enum LOGIN_STATE {
   none,
   success,
   loading,

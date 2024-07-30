@@ -6,20 +6,18 @@ import UserSvg from "../../assets/User.tsx"
 import FriendsSvg from "../../assets/Friends.tsx"
 import LogoutSvg from "../../assets/Logout.tsx"
 import PositionSvg from "../../assets/Position.tsx"
+import useUser from "../../hooks/useUser.tsx"
+import { LOGIN_URL } from "../../data/constants.tsx"
 
-export default function Layout({
-  loggedIn,
-  handleLogout,
-}: {
-  loggedIn: boolean
-  handleLogout: () => void
-}) {
-  if (!loggedIn) {
-    const navigate = useNavigate()
-    useEffect(() => {
-      navigate("/login")
-    })
-  }
+export default function Layout({ handleLogout }: { handleLogout: () => void }) {
+  const navigate = useNavigate()
+  const { token } = useUser()
+  useEffect(() => {
+    if (!token) {
+      navigate(LOGIN_URL)
+    }
+  }, [token])
+
   return (
     <>
       <div className="flex flex-row">

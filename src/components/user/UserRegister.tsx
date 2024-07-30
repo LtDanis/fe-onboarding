@@ -3,7 +3,7 @@ import "./UserRegister.css"
 export default function UserRegister() {
   return (
     <>
-      <p>Create User</p>
+      <h1>New User</h1>
     </>
   )
 }
