@@ -40,7 +40,6 @@ export default function LoginForm({ redirectTo }: { redirectTo: string }) {
           name={"username"}
           type={"text"}
           placeholder={"Username"}
-          // state={state}
         />
 
         <FormInput
@@ -48,7 +47,6 @@ export default function LoginForm({ redirectTo }: { redirectTo: string }) {
           name={"password"}
           type={"password"}
           placeholder={"Password"}
-          // state={state}
         />
 
         <Button title={"Log In"} />
