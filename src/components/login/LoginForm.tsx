@@ -3,6 +3,7 @@ import FormInput from "./FormInput.tsx"
 import Button from "./Button.tsx"
 import CommandLineSvg from "../../assets/CommandLine.tsx"
 import { FormEventHandler } from "react"
+import { useNavigate } from "react-router-dom"
 
 export default function LoginForm({
   onSignIn,
@@ -11,6 +12,10 @@ export default function LoginForm({
   onSignIn: FormEventHandler
   state: string
 }) {
+  const navigate = useNavigate()
+  if (state === "success") {
+    navigate("/users")
+  }
   return (
     <div className="flex flex-col min-w-[350px] login-form">
       <h1 className="text-xl flex">
