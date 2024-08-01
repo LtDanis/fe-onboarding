@@ -1,14 +1,16 @@
 import "./Button.css"
+import { LOGIN_STATE } from "../../data/enum.tsx"
+import useUserStore from "../../hooks/useUserStore.tsx"
 
 type ButtonInput = {
   title: string
-  state: string
 }
 
-export default function Button({ title, state }: ButtonInput) {
+export default function Button({ title }: ButtonInput) {
+  const { loginState } = useUserStore()
   return (
     <>
-      {state === "loading" ? (
+      {loginState === LOGIN_STATE.loading ? (
         <div className="wrap">
           <button type="button" disabled className="disabled-button">
             <div className="loader"></div>

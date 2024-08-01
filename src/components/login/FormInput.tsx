@@ -1,11 +1,12 @@
 import "./FormInput.css"
+import { LOGIN_STATE } from "../../data/enum.tsx"
+import useUserStore from "../../hooks/useUserStore.tsx"
 
 type FormInputProps = {
   id: string
   name: string
   type: string
   placeholder: string
-  state: string
 }
 
 export default function FormInput({
@@ -13,8 +14,8 @@ export default function FormInput({
   name,
   type,
   placeholder,
-  state,
 }: FormInputProps) {
+  const { loginState } = useUserStore()
   return (
     <>
       <div className="p-5">
@@ -25,7 +26,8 @@ export default function FormInput({
           name={name}
           placeholder={placeholder}
           required
-          disabled={state === "loading"}
+          autoComplete={type === "password" ? "current-password" : "off"}
+          disabled={loginState === LOGIN_STATE.loading}
         />
       </div>
     </>
