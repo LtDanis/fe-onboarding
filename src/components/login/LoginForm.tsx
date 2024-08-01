@@ -5,11 +5,11 @@ import CommandLineSvg from "../../assets/CommandLine.tsx"
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { LOGIN_STATE } from "../../data/enum.tsx"
-import useUser from "../../hooks/useUser.tsx"
+import useUserStore from "../../hooks/useUserStore.tsx"
 import useLogin from "../../hooks/useLogin.tsx"
 
 export default function LoginForm({ redirectTo }: { redirectTo: string }) {
-  const { token, loginState } = useUser()
+  const { token, loginState } = useUserStore()
   const navigate = useNavigate()
   const { onSignIn } = useLogin()
 
@@ -25,14 +25,12 @@ export default function LoginForm({ redirectTo }: { redirectTo: string }) {
         <CommandLineSvg />
         &nbsp;OnBoarding
       </h1>
-      <form className="form-input" action="" onSubmit={onSignIn}>
+      <form className="form-input" onSubmit={onSignIn}>
         <div className="p-5 form-header">Log In</div>
-        {loginState === LOGIN_STATE.error ? (
+        {loginState === LOGIN_STATE.error && (
           <div className="form-error">
             ⚠ Username or password is incorrect{" "}
           </div>
-        ) : (
-          ""
         )}
 
         <FormInput

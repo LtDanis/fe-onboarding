@@ -6,19 +6,29 @@ import UserSvg from "../../assets/User.tsx"
 import FriendsSvg from "../../assets/Friends.tsx"
 import LogoutSvg from "../../assets/Logout.tsx"
 import PositionSvg from "../../assets/Position.tsx"
-import useUser from "../../hooks/useUser.tsx"
-import { LOGIN_URL } from "../../data/constants.tsx"
+import useUserStore from "../../hooks/useUserStore.tsx"
+import {
+  DEPARTMENTS_LIST_URL,
+  LOGIN_URL,
+  POSITIONS_LIST_URL,
+  USERS_LIST_URL,
+} from "../../data/constants.tsx"
 import useLogin from "../../hooks/useLogin.tsx"
+import { UPDATE_STATE } from "../../data/enum.tsx"
 
 export default function Layout() {
   const navigate = useNavigate()
   const { handleLogout } = useLogin()
-  const { token } = useUser()
+  const { token, userState, updateUserState } = useUserStore()
   useEffect(() => {
     if (!token) {
       navigate(LOGIN_URL)
     }
   }, [token])
+
+  const closeUpdateStateMessage = () => {
+    updateUserState(null)
+  }
 
   return (
     <>
@@ -31,19 +41,19 @@ export default function Layout() {
             </div>
             <ul>
               <li>
-                <Link to="/users" className="flex flex-row">
+                <Link to={USERS_LIST_URL} className="flex flex-row">
                   <UserSvg />
                   &nbsp;Users
                 </Link>
               </li>
               <li>
-                <Link to="/departments" className="flex flex-row">
+                <Link to={DEPARTMENTS_LIST_URL} className="flex flex-row">
                   <FriendsSvg />
                   &nbsp;Departments
                 </Link>
               </li>
               <li>
-                <Link to="/positions" className="flex flex-row">
+                <Link to={POSITIONS_LIST_URL} className="flex flex-row">
                   <PositionSvg />
                   &nbsp;Positions
                 </Link>
@@ -62,6 +72,12 @@ export default function Layout() {
         <div className="flex">
           <Outlet />
         </div>
+        {userState === UPDATE_STATE.created && (
+          <div>
+            New user successfully created.
+            <button onClick={closeUpdateStateMessage}>X</button>
+          </div>
+        )}
       </div>
     </>
   )

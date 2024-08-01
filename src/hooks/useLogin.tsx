@@ -1,7 +1,7 @@
 import { FormEventHandler } from "react"
-import { BASE_URL } from "../data/constants.tsx"
+import { BASE_URL, USERS_LIST_URL } from "../data/constants.tsx"
 import { useNavigate } from "react-router-dom"
-import useUser from "./useUser.tsx"
+import useUserStore from "./useUserStore.tsx"
 import { LOGIN_STATE } from "../data/enum.tsx"
 
 //should be deleted on real app
@@ -12,11 +12,11 @@ async function delayToSeeLoader(ms: number) {
 
 export default function useLogin() {
   const navigate = useNavigate()
-  const userStore = useUser()
+  const { login, logout } = useUserStore()
   const LOGIN_URL = BASE_URL + "/auth/login"
 
   const onSignIn: FormEventHandler<HTMLFormElement> = async (form) => {
-    userStore.login(LOGIN_STATE.loading, null)
+    login(LOGIN_STATE.loading, null)
     form.preventDefault()
 
     const formData = new FormData(form.currentTarget)
@@ -39,15 +39,15 @@ export default function useLogin() {
 
     if (token) {
       await delayToSeeLoader(700)
-      userStore.login(LOGIN_STATE.success, token)
-      navigate("/users")
+      login(LOGIN_STATE.success, token)
+      navigate(USERS_LIST_URL)
     } else {
-      userStore.login(LOGIN_STATE.error, null)
+      login(LOGIN_STATE.error, null)
     }
   }
 
   const handleLogout = () => {
-    userStore.logout()
+    logout()
     navigate(LOGIN_URL)
   }
 

@@ -3,6 +3,10 @@ import { Link } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { User } from "../../data/classes.tsx"
 import useFetch from "../../hooks/useFetch.tsx"
+import {
+  USERS_EDIT_PARTIAL_URL,
+  USERS_REGISTER_URL,
+} from "../../data/constants.tsx"
 
 export default function UserList() {
   const [users, setUsers] = useState<User[]>([])
@@ -17,22 +21,34 @@ export default function UserList() {
   }, [])
 
   return (
-    <>
-      <div className="flex">
+    <div className="flex">
+      <div>
         <p>Users</p>
-        <Link to="/users/register">New user</Link>
+        &nbsp;
+        <Link className="font-bold" to={USERS_REGISTER_URL}>
+          New user
+        </Link>
       </div>
-      <div className="flex-row">
+      <div className="container">
         <ul>
-          {users && users.length > 0
-            ? users.map((user: User) => (
-                <li key={user.id}>
+          {users && users.length > 0 ? (
+            users.map((user: User) => (
+              <li className="min-w-full" key={user.id}>
+                <Link to={USERS_EDIT_PARTIAL_URL + user.id}>
                   {user.name} {user.surname}
-                </li>
-              ))
-            : ""}
+                </Link>
+              </li>
+            ))
+          ) : (
+            <>
+              <div>There are no data to show currently.</div>
+              <Link className="text-orange-600" to={USERS_REGISTER_URL}>
+                Create new user.
+              </Link>
+            </>
+          )}
         </ul>
       </div>
-    </>
+    </div>
   )
 }

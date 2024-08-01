@@ -1,6 +1,6 @@
 import "./FormInput.css"
-import useUser from "../../hooks/useUser.tsx"
 import { LOGIN_STATE } from "../../data/enum.tsx"
+import useUserStore from "../../hooks/useUserStore.tsx"
 
 type FormInputProps = {
   id: string
@@ -15,7 +15,7 @@ export default function FormInput({
   type,
   placeholder,
 }: FormInputProps) {
-  const { loginState } = useUser()
+  const { loginState } = useUserStore()
   return (
     <>
       <div className="p-5">
