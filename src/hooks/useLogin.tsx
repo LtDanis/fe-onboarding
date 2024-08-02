@@ -1,12 +1,12 @@
 import { FormEventHandler } from "react"
 import { BASE_URL, USERS_LIST_URL } from "../data/constants.tsx"
 import { useNavigate } from "react-router-dom"
-import useUserStore from "./useUserStore.tsx"
 import { LOGIN_STATE } from "../data/enum.tsx"
+import useLoginStore from "./store/useLoginStore.tsx"
 
 export default function useLogin() {
   const navigate = useNavigate()
-  const { login, logout } = useUserStore()
+  const { login, logout } = useLoginStore()
   const LOGIN_URL = BASE_URL + "/auth/login"
 
   const onSignIn: FormEventHandler<HTMLFormElement> = async (form) => {

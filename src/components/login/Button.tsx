@@ -1,13 +1,13 @@
 import "./Button.css"
 import { LOGIN_STATE } from "../../data/enum.tsx"
-import useUserStore from "../../hooks/useUserStore.tsx"
+import useLoginStore from "../../hooks/store/useLoginStore.tsx"
 
 type ButtonInput = {
   title: string
 }
 
 export default function Button({ title }: ButtonInput) {
-  const { loginState } = useUserStore()
+  const { loginState } = useLoginStore()
   return (
     <>
       {loginState === LOGIN_STATE.loading ? (

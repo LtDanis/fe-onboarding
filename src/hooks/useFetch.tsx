@@ -1,10 +1,10 @@
 import { BASE_URL, ITEMS_PER_PAGE, LOGIN_URL } from "../data/constants.tsx"
 import { useNavigate } from "react-router-dom"
-import useUserStore from "./useUserStore.tsx"
+import useLoginStore from "./store/useLoginStore.tsx"
 
 export default function useFetch() {
   const navigate = useNavigate()
-  const { logout, token } = useUserStore()
+  const { logout, token } = useLoginStore()
 
   const onFetch: any = async (
     requestUrl: string,
@@ -38,10 +38,16 @@ export default function useFetch() {
       },
     }
 
-    const res = await fetch(
-      BASE_URL + requestUrl + `?_page=${page}&_limit=${ITEMS_PER_PAGE}`,
-      requestOptions,
-    )
+    const fullUrl: string =
+      BASE_URL +
+      requestUrl +
+      "?" +
+      new URLSearchParams({
+        _page: page.toString(),
+        _limit: ITEMS_PER_PAGE.toString(),
+      }).toString()
+
+    const res = await fetch(fullUrl, requestOptions)
     if (res.status === 401) {
       logout()
       navigate(LOGIN_URL)

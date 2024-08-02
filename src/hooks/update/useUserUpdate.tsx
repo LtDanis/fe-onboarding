@@ -1,9 +1,9 @@
 import { useNavigate } from "react-router-dom"
-import { USERS_LIST_URL } from "../data/constants.tsx"
+import { USERS_LIST_URL } from "../../data/constants.tsx"
 import { FormEvent, FormEventHandler } from "react"
-import useFetch from "./useFetch.tsx"
-import useUserStore from "./useUserStore.tsx"
-import { UPDATE_STATE } from "../data/enum.tsx"
+import useFetch from "../useFetch.tsx"
+import useUserStore from "../store/useUserStore.tsx"
+import { UPDATE_STATE } from "../../data/enum.tsx"
 
 export default function useUserUpdate() {
   const navigate = useNavigate()

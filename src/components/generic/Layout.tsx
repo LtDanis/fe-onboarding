@@ -6,7 +6,7 @@ import UserSvg from "../../assets/User.tsx"
 import FriendsSvg from "../../assets/Friends.tsx"
 import LogoutSvg from "../../assets/Logout.tsx"
 import PositionSvg from "../../assets/Position.tsx"
-import useUserStore from "../../hooks/useUserStore.tsx"
+import useUserStore from "../../hooks/store/useUserStore.tsx"
 import {
   DEPARTMENTS_LIST_URL,
   LOGIN_URL,
@@ -15,11 +15,13 @@ import {
 } from "../../data/constants.tsx"
 import useLogin from "../../hooks/useLogin.tsx"
 import { UPDATE_STATE } from "../../data/enum.tsx"
+import useLoginStore from "../../hooks/store/useLoginStore.tsx"
 
 export default function Layout() {
   const navigate = useNavigate()
   const { handleLogout } = useLogin()
-  const { token, userState, updateUserState } = useUserStore()
+  const { token } = useLoginStore()
+  const { userState, updateUserState } = useUserStore()
   useEffect(() => {
     if (!token) {
       navigate(LOGIN_URL)

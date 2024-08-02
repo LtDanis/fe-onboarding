@@ -1,5 +1,5 @@
 import "./DepartmentRegister.css"
-import useDepartmentUpdate from "../../hooks/useDepartmentUpdate.tsx"
+import useDepartmentUpdate from "../../hooks/update/useDepartmentUpdate.tsx"
 import DepartmentForm from "./DepartmentForm.tsx"
 
 export default function DepartmentRegister() {

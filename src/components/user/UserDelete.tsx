@@ -5,7 +5,7 @@ import { useEffect, useState } from "react"
 import { User } from "../../data/classes.tsx"
 import { USERS_LIST_URL } from "../../data/constants.tsx"
 import { UPDATE_STATE } from "../../data/enum.tsx"
-import useUserStore from "../../hooks/useUserStore.tsx"
+import useUserStore from "../../hooks/store/useUserStore.tsx"
 
 export default function UserDelete() {
   const [user, setUser] = useState<User | null>(null)

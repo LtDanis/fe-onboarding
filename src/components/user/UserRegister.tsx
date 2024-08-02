@@ -1,5 +1,5 @@
 import "./UserRegister.css"
-import useUserUpdate from "../../hooks/useUserUpdate.tsx"
+import useUserUpdate from "../../hooks/update/useUserUpdate.tsx"
 import UserForm from "./UserForm.tsx"
 
 export default function UserRegister() {

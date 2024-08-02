@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom"
-import { DEPARTMENTS_LIST_URL } from "../data/constants.tsx"
+import { DEPARTMENTS_LIST_URL } from "../../data/constants.tsx"
 import { FormEvent, FormEventHandler } from "react"
-import useFetch from "./useFetch.tsx"
-import useUserStore from "./useUserStore.tsx"
-import { UPDATE_STATE } from "../data/enum.tsx"
+import useFetch from "../useFetch.tsx"
+import { UPDATE_STATE } from "../../data/enum.tsx"
+import useDepartmentStore from "../store/useDepartmentStore.tsx"
 
 export default function useDepartmentUpdate() {
   const navigate = useNavigate()
-  const { updateDepartmentState } = useUserStore()
+  const { updateDepartmentState } = useDepartmentStore()
   const { onFetch } = useFetch()
 
   const onDepartmentRegister: FormEventHandler<HTMLFormElement> = async (

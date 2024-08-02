@@ -5,15 +5,15 @@ import { useNavigate, useParams } from "react-router-dom"
 import useFetch from "../../hooks/useFetch.tsx"
 import DepartmentForm from "./DepartmentForm.tsx"
 import { DEPARTMENTS_LIST_URL } from "../../data/constants.tsx"
-import useDepartmentUpdate from "../../hooks/useDepartmentUpdate.tsx"
+import useDepartmentUpdate from "../../hooks/update/useDepartmentUpdate.tsx"
 import { UPDATE_STATE } from "../../data/enum.tsx"
-import useUserStore from "../../hooks/useUserStore.tsx"
+import useDepartmentStore from "../../hooks/store/useDepartmentStore.tsx"
 
 export default function DepartmentEdit() {
   const [department, setDepartment] = useState<Department | null>(null)
   const params = useParams()
   const navigate = useNavigate()
-  const { updateDepartmentState } = useUserStore()
+  const { updateDepartmentState } = useDepartmentStore()
   const { onDepartmentEdit } = useDepartmentUpdate()
   const { onFetch } = useFetch()
 

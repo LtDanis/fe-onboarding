@@ -7,7 +7,7 @@ import {
 import { FormEventHandler, useEffect, useState } from "react"
 import { User } from "../../data/classes.tsx"
 import useFetch from "../../hooks/useFetch.tsx"
-import useUserUpdate from "../../hooks/useUserUpdate.tsx"
+import useUserUpdate from "../../hooks/update/useUserUpdate.tsx"
 import UserForm from "./UserForm.tsx"
 
 export default function UserEdit() {
