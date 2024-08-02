@@ -10,6 +10,9 @@ type Store = {
 
   userState: UPDATE_STATE | null
   updateUserState: (userState: UPDATE_STATE | null) => void
+
+  departmentState: UPDATE_STATE | null
+  updateDepartmentState: (userState: UPDATE_STATE | null) => void
 }
 
 const useUserStore = create<Store>()(
@@ -22,6 +25,11 @@ const useUserStore = create<Store>()(
       logout: () => set({ loginState: null, token: null, userState: null }),
       userState: null,
       updateUserState: (userState: UPDATE_STATE | null) =>
+        set({
+          userState: userState,
+        }),
+      departmentState: null,
+      updateDepartmentState: (userState: UPDATE_STATE | null) =>
         set({
           userState: userState,
         }),

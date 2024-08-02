@@ -14,6 +14,9 @@ export default function UserForm({
   onSubmitForm: FormEventHandler<HTMLFormElement>
   user: User | null
 }) {
+  const [userName, setUserName] = useState(user?.name || "")
+  const [userSurname, setUserSurname] = useState(user?.surname || "")
+
   const [pageState, setPageState] = useState(PAGE_STATE.loading)
   const [departments, setDepartments] = useState<Department[]>([])
   const [positions, setPositions] = useState<Position[]>([])
@@ -36,6 +39,11 @@ export default function UserForm({
     fetchUser()
   }, [])
 
+  useEffect(() => {
+    setUserName(user?.name || "")
+    setUserSurname(user?.surname || "")
+  }, [user])
+
   return (
     <>
       {pageState === PAGE_STATE.completed ? (
@@ -50,7 +58,8 @@ export default function UserForm({
               id="name"
               name="name"
               placeholder="Name"
-              value={user?.name}
+              value={userName}
+              onChange={(e) => setUserName(e.target.value)}
               required
               autoComplete="off"
             />
@@ -63,7 +72,8 @@ export default function UserForm({
               id="surname"
               name="surname"
               placeholder="Surname"
-              value={user?.surname}
+              value={userSurname}
+              onChange={(e) => setUserSurname(e.target.value)}
               required
               autoComplete="off"
             />

@@ -5,7 +5,7 @@ import { User } from "../../data/classes.tsx"
 import useFetch from "../../hooks/useFetch.tsx"
 import {
   ITEMS_PER_PAGE,
-  USERS_EDIT_PARTIAL_URL,
+  USERS_EDIT_URL_WITH_ID,
   USERS_REGISTER_URL,
 } from "../../data/constants.tsx"
 import { PAGE_STATE } from "../../data/enum.tsx"
@@ -52,7 +52,7 @@ export default function UserList() {
               {users && users.length > 0 ? (
                 users.map((user: User) => (
                   <li className="min-w-full" key={user.id}>
-                    <Link to={USERS_EDIT_PARTIAL_URL + user.id}>
+                    <Link to={USERS_EDIT_URL_WITH_ID(user.id)}>
                       {user.name} {user.surname}
                     </Link>
                   </li>

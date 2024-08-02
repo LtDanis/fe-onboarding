@@ -1,7 +1,7 @@
 import "./UserEdit.css"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import {
-  USERS_DELETE_PARTIAL_URL,
+  USERS_DELETE_URL_WITH_ID,
   USERS_LIST_URL,
 } from "../../data/constants.tsx"
 import { FormEventHandler, useEffect, useState } from "react"
@@ -37,7 +37,7 @@ export default function UserEdit() {
       <p>
         {(user && user.name) || "-"} {(user && user.surname) || "-"}
       </p>
-      <Link to={USERS_DELETE_PARTIAL_URL + params.id}>DELETE</Link>
+      <Link to={USERS_DELETE_URL_WITH_ID(params.id)}>DELETE</Link>
       <UserForm onSubmitForm={onSubmitForm} user={user} />
     </>
   )
