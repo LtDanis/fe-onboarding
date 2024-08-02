@@ -42,6 +42,7 @@ export default function useUserUpdate() {
   }
 
   const convertBase64 = (file: any) => {
+    if (!file || file.size === 0) return null
     return new Promise((resolve, reject) => {
       const fileReader = new FileReader()
       fileReader.readAsDataURL(file)

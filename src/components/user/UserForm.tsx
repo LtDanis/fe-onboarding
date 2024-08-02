@@ -4,15 +4,15 @@ import { USERS_LIST_URL } from "../../data/constants.tsx"
 import { useNavigate } from "react-router-dom"
 import { PAGE_STATE } from "../../data/enum.tsx"
 import useFetch from "../../hooks/useFetch.tsx"
-import { Department, Position } from "../../data/classes.tsx"
+import { Department, Position, User } from "../../data/classes.tsx"
 import Avatar from "../generic/Avatar.tsx"
 
 export default function UserForm({
   onSubmitForm,
-  image,
+  user,
 }: {
   onSubmitForm: FormEventHandler<HTMLFormElement>
-  image: string | undefined
+  user: User | null
 }) {
   const [pageState, setPageState] = useState(PAGE_STATE.loading)
   const [departments, setDepartments] = useState<Department[]>([])
@@ -50,6 +50,7 @@ export default function UserForm({
               id="name"
               name="name"
               placeholder="Name"
+              value={user?.name}
               required
               autoComplete="off"
             />
@@ -62,6 +63,7 @@ export default function UserForm({
               id="surname"
               name="surname"
               placeholder="Surname"
+              value={user?.surname}
               required
               autoComplete="off"
             />
@@ -106,7 +108,7 @@ export default function UserForm({
               placeholder="Image"
               autoComplete="off"
             />
-            <Avatar image={image} />
+            <Avatar image={user?.image} />
           </div>
 
           <div className="p-5">

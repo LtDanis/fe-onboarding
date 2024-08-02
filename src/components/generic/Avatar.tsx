@@ -5,7 +5,7 @@ export default function Avatar({ image }: { image: string | undefined }) {
     <img
       className="form-image"
       id="base64image"
-      src={image || emptyAvatar}
+      src={image ? image : emptyAvatar}
       alt="image"
     />
   )

@@ -38,7 +38,7 @@ export default function UserEdit() {
         {(user && user.name) || "-"} {(user && user.surname) || "-"}
       </p>
       <Link to={USERS_DELETE_PARTIAL_URL + params.id}>DELETE</Link>
-      <UserForm onSubmitForm={onSubmitForm} image={user?.image} />
+      <UserForm onSubmitForm={onSubmitForm} user={user} />
     </>
   )
 }
