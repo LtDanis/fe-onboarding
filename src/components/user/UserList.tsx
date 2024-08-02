@@ -11,16 +11,20 @@ import {
 import { PAGE_STATE } from "../../data/enum.tsx"
 import ReactPaginate from "react-paginate"
 
-export default function UserList() {
+export default function UserList({ userListUrl }: { userListUrl?: string }) {
   const [pageState, setPageState] = useState(PAGE_STATE.loading)
   const [currentPage, setCurrentPage] = useState(1)
   const [numberOfPages, setNumberOfPages] = useState(1)
   const [users, setUsers] = useState<User[]>([])
   const { onFetchPage } = useFetch()
+  const defaultUserListUrl = "/api/user"
 
   useEffect(() => {
     const fetchUsers = async () => {
-      const result = await onFetchPage("/api/user", currentPage)
+      const result = await onFetchPage(
+        userListUrl || defaultUserListUrl,
+        currentPage,
+      )
       setUsers(result.data)
       if (pageState === PAGE_STATE.loading) {
         setNumberOfPages(Math.ceil(result.numberOfItems / ITEMS_PER_PAGE))
