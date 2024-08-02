@@ -10,3 +10,5 @@ export const DEPARTMENTS_LIST_URL = "/departments"
 export const DEPARTMENTS_REGISTER_URL = "/departments/register"
 export const DEPARTMENTS_EDIT_URL = "/departments/edit/:id"
 export const POSITIONS_LIST_URL = "/positions"
+
+export const ITEMS_PER_PAGE = 10

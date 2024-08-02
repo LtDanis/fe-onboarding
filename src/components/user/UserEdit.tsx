@@ -30,9 +30,7 @@ export default function UserEdit() {
   }, [])
 
   const onSubmitForm: FormEventHandler<HTMLFormElement> = async (form) => {
-    form.preventDefault()
-    const formData = new FormData(form.currentTarget)
-    await onUserEdit(formData, user?.id)
+    await onUserEdit(form, user?.id)
   }
   return (
     <>
@@ -40,7 +38,7 @@ export default function UserEdit() {
         {(user && user.name) || "-"} {(user && user.surname) || "-"}
       </p>
       <Link to={USERS_DELETE_PARTIAL_URL + params.id}>DELETE</Link>
-      <UserForm onSubmitForm={onSubmitForm} />
+      <UserForm onSubmitForm={onSubmitForm} image={user?.image} />
     </>
   )
 }

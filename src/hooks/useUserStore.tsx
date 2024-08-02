@@ -1,5 +1,6 @@
 import { create } from "zustand"
 import { LOGIN_STATE, UPDATE_STATE } from "../data/enum.tsx"
+import { persist } from "zustand/middleware"
 
 type Store = {
   loginState: LOGIN_STATE | null
@@ -11,17 +12,24 @@ type Store = {
   updateUserState: (userState: UPDATE_STATE | null) => void
 }
 
-const useUserStore = create<Store>((set) => ({
-  loginState: null,
-  token: null,
-  login: (loginState: LOGIN_STATE, token: string | null) =>
-    set({ loginState: loginState, token: token, userState: null }),
-  logout: () => set({ loginState: null, token: null, userState: null }),
-  userState: null,
-  updateUserState: (userState: UPDATE_STATE | null) =>
-    set({
-      userState: userState,
+const useUserStore = create<Store>()(
+  persist(
+    (set) => ({
+      loginState: null,
+      token: null,
+      login: (loginState: LOGIN_STATE, token: string | null) =>
+        set({ loginState: loginState, token: token, userState: null }),
+      logout: () => set({ loginState: null, token: null, userState: null }),
+      userState: null,
+      updateUserState: (userState: UPDATE_STATE | null) =>
+        set({
+          userState: userState,
+        }),
     }),
-}))
+    {
+      name: "zustand-state-storage",
+    },
+  ),
+)
 
 export default useUserStore
