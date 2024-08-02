@@ -9,3 +9,9 @@ export enum UPDATE_STATE {
   edited,
   deleted,
 }
+
+export enum PAGE_STATE {
+  loading,
+  completed,
+  error,
+}

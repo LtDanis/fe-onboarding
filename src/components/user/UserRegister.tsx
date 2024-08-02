@@ -7,7 +7,7 @@ export default function UserRegister() {
   return (
     <>
       <h1>New User</h1>
-      <UserForm onSubmitForm={onUserRegister} />
+      <UserForm onSubmitForm={onUserRegister} user={null} />
     </>
   )
 }

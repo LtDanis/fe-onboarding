@@ -4,12 +4,6 @@ import { useNavigate } from "react-router-dom"
 import useUserStore from "./useUserStore.tsx"
 import { LOGIN_STATE } from "../data/enum.tsx"
 
-//should be deleted on real app
-async function delayToSeeLoader(ms: number) {
-  const delay = async (ms: number) => new Promise((res) => setTimeout(res, ms))
-  await delay(ms)
-}
-
 export default function useLogin() {
   const navigate = useNavigate()
   const { login, logout } = useUserStore()
@@ -38,7 +32,6 @@ export default function useLogin() {
     const token = access.access_token
 
     if (token) {
-      await delayToSeeLoader(700)
       login(LOGIN_STATE.success, token)
       navigate(USERS_LIST_URL)
     } else {

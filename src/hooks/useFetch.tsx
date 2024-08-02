@@ -1,4 +1,4 @@
-import { BASE_URL, LOGIN_URL } from "../data/constants.tsx"
+import { BASE_URL, ITEMS_PER_PAGE, LOGIN_URL } from "../data/constants.tsx"
 import { useNavigate } from "react-router-dom"
 import useUserStore from "./useUserStore.tsx"
 
@@ -29,5 +29,30 @@ export default function useFetch() {
     return await res.json()
   }
 
-  return { onFetch }
+  const onFetchPage: any = async (requestUrl: string, page: number) => {
+    const requestOptions = {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    }
+
+    const res = await fetch(
+      BASE_URL + requestUrl + `?_page=${page}&_limit=${ITEMS_PER_PAGE}`,
+      requestOptions,
+    )
+    if (res.status === 401) {
+      logout()
+      navigate(LOGIN_URL)
+      return null
+    }
+    const data = await res.json()
+    return {
+      data: data,
+      numberOfItems: Number(res.headers.get("X-Total-Count")),
+    }
+  }
+
+  return { onFetch, onFetchPage }
 }
