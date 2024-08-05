@@ -1,6 +1,6 @@
 import "./LoginForm.css"
 import FormInput from "./FormInput.tsx"
-import Button from "./Button.tsx"
+import Button from "../generic/Button.tsx"
 import CommandLineSvg from "../../assets/CommandLine.tsx"
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
@@ -20,35 +20,40 @@ export default function LoginForm({ redirectTo }: { redirectTo: string }) {
   }, [token])
 
   return (
-    <div className="flex flex-col min-w-[350px] login-form">
-      <h1 className="text-xl flex">
-        <CommandLineSvg />
-        &nbsp;OnBoarding
-      </h1>
-      <form className="form-input" onSubmit={onSignIn}>
-        <div className="p-5 form-header">Log In</div>
-        {loginState === LOGIN_STATE.error && (
-          <div className="form-error">
-            ⚠ Username or password is incorrect{" "}
-          </div>
-        )}
+    <div className="login-form">
+      <div className="flex flex-col min-w-[350px]">
+        <div className="text-xl flex">
+          <CommandLineSvg />
+          &nbsp;OnBoarding
+        </div>
+        <form className="form-input" onSubmit={onSignIn}>
+          <div className="p-5 form-header">Log In</div>
+          {loginState === LOGIN_STATE.error && (
+            <div className="login-form-error">
+              ⚠ Username or password is incorrect{" "}
+            </div>
+          )}
 
-        <FormInput
-          id={"username"}
-          name={"username"}
-          type={"text"}
-          placeholder={"Username"}
-        />
+          <FormInput
+            id={"username"}
+            name={"username"}
+            type={"text"}
+            placeholder={"Username"}
+          />
 
-        <FormInput
-          id={"password"}
-          name={"password"}
-          type={"password"}
-          placeholder={"Password"}
-        />
+          <FormInput
+            id={"password"}
+            name={"password"}
+            type={"password"}
+            placeholder={"Password"}
+          />
 
-        <Button title={"Log In"} />
-      </form>
+          <Button
+            title={"Log In"}
+            isLoading={loginState === LOGIN_STATE.loading}
+          />
+        </form>
+      </div>
     </div>
   )
 }

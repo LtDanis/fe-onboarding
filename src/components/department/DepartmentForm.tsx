@@ -52,12 +52,16 @@ export default function DepartmentForm({
             </div>
 
             <div className="wrap">
-              <button type="submit" className="button">
+              <button type="submit" className="submit-button">
                 Save
               </button>
             </div>
             <div className="wrap">
-              <button type="button" onClick={cancelAction} className="button">
+              <button
+                type="button"
+                onClick={cancelAction}
+                className="cancel-button"
+              >
                 Cancel
               </button>
             </div>

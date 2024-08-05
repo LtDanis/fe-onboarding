@@ -1,17 +1,12 @@
-.form-input {
-    border-style: solid;
-    border-top-color: orange;
-    border-width: 1px;
-    border-top-width: 2px;
+.login-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: inherit;
 }
 
-.form-header {
-    border-style: solid;
-    border-width: 1px;
-}
-
-.form-error {
-    background-color: red;
+.login-form-error {
+    background-color: var(--red-error);
     color: white;
     font-size: 12px;
     padding: 10px 20px;

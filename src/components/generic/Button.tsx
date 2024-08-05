@@ -1,16 +1,14 @@
 import "./Button.css"
-import { LOGIN_STATE } from "../../data/enum.tsx"
-import useLoginStore from "../../hooks/store/useLoginStore.tsx"
 
 type ButtonInput = {
   title: string
+  isLoading: boolean
 }
 
-export default function Button({ title }: ButtonInput) {
-  const { loginState } = useLoginStore()
+export default function Button({ title, isLoading }: ButtonInput) {
   return (
     <>
-      {loginState === LOGIN_STATE.loading ? (
+      {isLoading ? (
         <div className="wrap">
           <button type="button" disabled className="disabled-button">
             <div className="loader"></div>
@@ -19,7 +17,7 @@ export default function Button({ title }: ButtonInput) {
         </div>
       ) : (
         <div className="wrap">
-          <button type="submit" className="button">
+          <button type="submit" className="submit-button">
             {title}
           </button>
         </div>

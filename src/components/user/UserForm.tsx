@@ -123,9 +123,12 @@ export default function UserForm({
               </div>
 
               <div className="p-5">
-                <label htmlFor="image">Image</label>
+                <label htmlFor="image">
+                  <p>Image</p>
+                  <Avatar image={user?.image} />
+                </label>
                 <input
-                  className="w-full"
+                  className="w-full hidden"
                   type="file"
                   accept="image/*"
                   id="image"
@@ -133,7 +136,6 @@ export default function UserForm({
                   placeholder="Image"
                   autoComplete="off"
                 />
-                <Avatar image={user?.image} />
               </div>
             </>
           ) : (
@@ -150,12 +152,16 @@ export default function UserForm({
           )}
 
           <div className="wrap">
-            <button type="submit" className="button">
+            <button type="submit" className="submit-button">
               Save
             </button>
           </div>
           <div className="wrap">
-            <button type="button" onClick={cancelAction} className="button">
+            <button
+              type="button"
+              onClick={cancelAction}
+              className="cancel-button"
+            >
               Cancel
             </button>
           </div>

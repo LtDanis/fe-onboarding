@@ -42,7 +42,7 @@ export default function DepartmentEdit() {
     <>
       <p>{(department && department.name) || "-"}</p>
       <div className="wrap">
-        <button onClick={deleteDepartment} className="button">
+        <button onClick={deleteDepartment} className="submit-button">
           Delete Department
         </button>
       </div>

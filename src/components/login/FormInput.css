@@ -1,4 +1,4 @@
 .login-input-field {
-    border-bottom-color: darkgray;
+    border-bottom-color: var(--darkgrey);
     border-bottom-width: thin;
 }

@@ -34,35 +34,45 @@ export default function Layout() {
 
   return (
     <>
-      <div className="flex flex-row">
-        <div className="flex menu-bar">
+      <div className="flex flex-row h-screen">
+        <div className="menu-bar">
           <nav>
-            <div className="flex flex-row">
+            <div className="flex flex-row menu-item">
               <CommandLineSvg />
               &nbsp;OnBoarding
             </div>
             <ul>
               <li>
-                <Link to={USERS_LIST_URL} className="flex flex-row">
+                <Link to={USERS_LIST_URL} className="flex flex-row menu-item">
                   <UserSvg />
                   &nbsp;Users
                 </Link>
               </li>
               <li>
-                <Link to={DEPARTMENTS_LIST_URL} className="flex flex-row">
+                <Link
+                  to={DEPARTMENTS_LIST_URL}
+                  className="flex flex-row menu-item"
+                >
                   <FriendsSvg />
                   &nbsp;Departments
                 </Link>
               </li>
               <li>
-                <Link to={POSITIONS_LIST_URL} className="flex flex-row">
+                <Link
+                  to={POSITIONS_LIST_URL}
+                  className="flex flex-row menu-item"
+                >
                   <PositionSvg />
                   &nbsp;Positions
                 </Link>
               </li>
 
               <li>
-                <Link to="/" className="flex flex-row" onClick={handleLogout}>
+                <Link
+                  to="/"
+                  className="flex flex-row menu-item bottom-item"
+                  onClick={handleLogout}
+                >
                   <LogoutSvg />
                   &nbsp;Log out
                 </Link>
@@ -71,13 +81,15 @@ export default function Layout() {
           </nav>
         </div>
 
-        <div className="flex">
-          <Outlet />
-        </div>
+        <Outlet />
         {userState === UPDATE_STATE.created && (
-          <div>
-            New user successfully created.
-            <button onClick={closeUpdateStateMessage}>X</button>
+          <div className="status-notification-container">
+            <div className="status-update-message">
+              New user successfully created
+              <button className="ml-2" onClick={closeUpdateStateMessage}>
+                X
+              </button>
+            </div>
           </div>
         )}
       </div>

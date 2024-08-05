@@ -28,7 +28,7 @@ export default function DepartmentList() {
       {pageState === PAGE_STATE.loading ? (
         <div className="text-gray-600">Loading...</div>
       ) : (
-        <div className="flex">
+        <div className="flex flex-col">
           <div>
             <p>Departments</p>
             &nbsp;

@@ -5,6 +5,7 @@ import {
   DEPARTMENTS_LIST_URL,
   DEPARTMENTS_REGISTER_URL,
   LOGIN_URL,
+  POSITIONS_LIST_URL,
   USERS_DELETE_URL,
   USERS_EDIT_URL,
   USERS_LIST_URL,
@@ -20,6 +21,7 @@ import DepartmentList from "./components/department/DepartmentList.tsx"
 import DepartmentRegister from "./components/department/DepartmentRegister.tsx"
 import DepartmentEdit from "./components/department/DepartmentEdit.tsx"
 import NonExistentPage from "./components/generic/NonExistentPage.tsx"
+import PositionList from "./components/position/PositionList.tsx"
 
 export default function App() {
   return (
@@ -40,6 +42,7 @@ export default function App() {
             element={<DepartmentRegister />}
           />
           <Route path={DEPARTMENTS_EDIT_URL} element={<DepartmentEdit />} />
+          <Route path={POSITIONS_LIST_URL} element={<PositionList />} />
           <Route
             path="*"
             element={<NonExistentPage redirectTo={USERS_LIST_URL} />}

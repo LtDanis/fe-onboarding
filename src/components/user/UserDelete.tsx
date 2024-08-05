@@ -45,12 +45,12 @@ export default function UserDelete() {
         ?
       </div>
       <div className="wrap">
-        <button onClick={deleteUser} className="button">
+        <button onClick={deleteUser} className="submit-button">
           Delete User
         </button>
       </div>
       <div className="wrap">
-        <button onClick={cancelAction} className="button">
+        <button onClick={cancelAction} className="cancel-button">
           Cancel
         </button>
       </div>

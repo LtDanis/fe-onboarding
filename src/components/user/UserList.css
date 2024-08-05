@@ -1,0 +1,36 @@
+.users-list {
+    display: flex;
+    flex: 1;
+    flex-flow: row nowrap;
+}
+
+.list-header {
+    padding: 5px;
+}
+
+.align-right {
+    margin-left: auto;
+}
+
+.user-item {
+    border-color: var(--lightgray);
+    border-bottom-width: thin;
+}
+
+.user-item:hover {
+    background-color: var(--lightgray);
+}
+
+.paginate {
+    padding: 5px;
+}
+
+.paginate * {
+    background-color: var(--lightgray);
+    padding: 3px;
+    margin: 2px;
+}
+
+.paginate > .selected {
+    background-color: var(--darkgrey);
+}
