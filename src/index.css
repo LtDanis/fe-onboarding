@@ -3,16 +3,30 @@
 @tailwind utilities;
 
 :root {
-  font-family: 'Titillium Web', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  font-weight: 200;
+    font-family: 'Titillium Web', Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    font-weight: 200;
 }
 
 body {
-  min-width: 100%;
-  min-height: 100vh;
-  caret-color: transparent;
+    min-width: 100%;
+    min-height: 100vh;
+    caret-color: transparent;
 }
 
 input {
-  caret-color: black;
+    caret-color: black;
+    border-bottom: 1px var(--darkgrey) solid;
+}
+
+label {
+    font-size: 0.7rem;
+    color: var(--darkgrey)
+}
+
+select {
+    border-bottom: 1px var(--darkgrey) solid;
+}
+
+.disabled-option {
+    color: var(--darkgrey);
 }

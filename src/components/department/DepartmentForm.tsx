@@ -22,7 +22,7 @@ export default function DepartmentForm({
 
   return (
     <>
-      <form className="form-input" onSubmit={onSubmitForm}>
+      <form className="orange-top-form-header" onSubmit={onSubmitForm}>
         <div className="p-5 form-header">
           <button type="button" onClick={selectGeneralInfo}>
             General information

@@ -21,7 +21,9 @@ export default function UserForm({
 
   const [pageState, setPageState] = useState(PAGE_STATE.loading)
   const [departments, setDepartments] = useState<Department[]>([])
+  const [selectedDepartment, setSelectedDepartment] = useState(false)
   const [positions, setPositions] = useState<Position[]>([])
+  const [selectedPosition, setSelectedPosition] = useState(false)
   const navigate = useNavigate()
   const { onFetch } = useFetch()
   const cancelAction = () => navigate(USERS_LIST_URL)
@@ -48,81 +50,107 @@ export default function UserForm({
 
   const selectGeneralInformation = () => setGeneralInfoSelected(true)
   const selectComments = () => setGeneralInfoSelected(false)
+  const setSelectedDep = () => setSelectedDepartment(true)
+  const setSelectedPos = () => setSelectedPosition(true)
 
   return (
     <>
       {pageState === PAGE_STATE.completed ? (
-        <form className="form-input" onSubmit={onSubmitForm}>
-          <div className="p-5 form-header">
-            <button type="button" onClick={selectGeneralInformation}>
-              General information
-            </button>
-          </div>
-          <div className="p-5 form-header">
-            <button type="button" onClick={selectComments}>
-              Comments
-            </button>
+        <form className="form-header" onSubmit={onSubmitForm}>
+          <div className="flex flex-row">
+            <div
+              className={`p-5 form-header ${generalInfoSelected && "orange-top-form-header"}`}
+            >
+              <button type="button" onClick={selectGeneralInformation}>
+                General information
+              </button>
+            </div>
+            <div
+              className={`p-5 form-header ${!generalInfoSelected && "orange-top-form-header"}`}
+            >
+              <button type="button" onClick={selectComments}>
+                Comments
+              </button>
+            </div>
           </div>
 
           {generalInfoSelected ? (
-            <>
-              <div className="p-5">
-                <input
-                  className="w-full"
-                  type="text"
-                  id="name"
-                  name="name"
-                  placeholder="Name"
-                  value={userName}
-                  onChange={(e) => setUserName(e.target.value)}
-                  required
-                  autoComplete="off"
-                />
+            <div className="flex flex-row">
+              <div className="flex-grow">
+                <div className="p-5">
+                  {user && <label htmlFor="name">Name</label>}
+                  <input
+                    className="w-full"
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Name"
+                    value={userName}
+                    onChange={(e) => setUserName(e.target.value)}
+                    required
+                    autoComplete="off"
+                  />
+                </div>
+
+                <div className="p-5">
+                  {user && <label htmlFor="surname">Surname</label>}
+                  <input
+                    className="w-full"
+                    type="text"
+                    id="surname"
+                    name="surname"
+                    placeholder="Surname"
+                    value={userSurname}
+                    onChange={(e) => setUserSurname(e.target.value)}
+                    required
+                    autoComplete="off"
+                  />
+                </div>
+
+                <div className="p-5">
+                  {user && <label htmlFor="position">Position</label>}
+                  <select
+                    className={`w-full ${!selectedPosition && !user && "disabled-option"}`}
+                    id="position"
+                    name="position"
+                    required
+                    autoComplete="off"
+                    onChange={setSelectedPos}
+                  >
+                    {!user && (
+                      <option disabled selected value="">
+                        Position
+                      </option>
+                    )}
+                    {positions.map((position: Position) => (
+                      <option value={position.id}>{position.name}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="p-5">
+                  {user && <label htmlFor="department">Department</label>}
+                  <select
+                    className={`w-full ${!selectedDepartment && !user && "disabled-option"}`}
+                    id="department"
+                    name="department"
+                    required
+                    autoComplete="off"
+                    onChange={setSelectedDep}
+                  >
+                    {!user && (
+                      <option disabled selected value="">
+                        Department
+                      </option>
+                    )}
+                    {departments.map((department: Department) => (
+                      <option value={department.id}>{department.name}</option>
+                    ))}
+                  </select>
+                </div>
               </div>
 
-              <div className="p-5">
-                <input
-                  className="w-full"
-                  type="text"
-                  id="surname"
-                  name="surname"
-                  placeholder="Surname"
-                  value={userSurname}
-                  onChange={(e) => setUserSurname(e.target.value)}
-                  required
-                  autoComplete="off"
-                />
-              </div>
-
-              <div className="p-5">
-                <select
-                  className="w-full"
-                  id="position"
-                  name="position"
-                  required
-                  autoComplete="off"
-                >
-                  {positions.map((position: Position) => (
-                    <option value={position.id}>{position.name}</option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="p-5">
-                <select
-                  className="w-full"
-                  id="department"
-                  name="department"
-                  required
-                  autoComplete="off"
-                >
-                  {departments.map((department: Department) => (
-                    <option value={department.id}>{department.name}</option>
-                  ))}
-                </select>
-              </div>
-
-              <div className="p-5">
+              <div className="p-5 flex-grow">
                 <label htmlFor="image">
                   <p>Image</p>
                   <Avatar image={user?.image} />
@@ -137,9 +165,10 @@ export default function UserForm({
                   autoComplete="off"
                 />
               </div>
-            </>
+            </div>
           ) : (
             <div className="p-5">
+              {user && <label htmlFor="comment">Comments</label>}
               <input
                 className="w-full"
                 type="text"
@@ -151,19 +180,21 @@ export default function UserForm({
             </div>
           )}
 
-          <div className="wrap">
-            <button type="submit" className="submit-button">
-              Save
-            </button>
-          </div>
-          <div className="wrap">
-            <button
-              type="button"
-              onClick={cancelAction}
-              className="cancel-button"
-            >
-              Cancel
-            </button>
+          <div className="flex flex-row">
+            <div className="wrap">
+              <button type="submit" className="submit-button">
+                Save
+              </button>
+            </div>
+            <div className="wrap">
+              <button
+                type="button"
+                onClick={cancelAction}
+                className="cancel-button"
+              >
+                Cancel
+              </button>
+            </div>
           </div>
         </form>
       ) : (

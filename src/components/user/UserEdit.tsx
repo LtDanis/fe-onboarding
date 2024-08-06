@@ -33,12 +33,18 @@ export default function UserEdit() {
     await onUserEdit(form, user?.id)
   }
   return (
-    <>
-      <p>
-        {(user && user.name) || "-"} {(user && user.surname) || "-"}
-      </p>
-      <Link to={USERS_DELETE_URL_WITH_ID(params.id)}>DELETE</Link>
-      <UserForm onSubmitForm={onSubmitForm} user={user} />
-    </>
+    <div className="flex flex-col flex-1">
+      <div className="flex flex-row list-header">
+        <div className="header">
+          {(user && user.name) || "-"} {(user && user.surname) || "-"}
+        </div>
+        <button className="cancel-button align-right">
+          <Link to={USERS_DELETE_URL_WITH_ID(params.id)}>Delete user</Link>
+        </button>
+      </div>
+      <div className="m-5">
+        <UserForm onSubmitForm={onSubmitForm} user={user} />
+      </div>
+    </div>
   )
 }

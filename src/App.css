@@ -7,6 +7,8 @@
   --lightgray: lightgrey;
   --darkgrey: darkgrey;
   --red-error: red;
+  --darkred: darkred;
+  --darkred-hover: #780000;
   --main-orange: rgb(255, 140, 0);
   --hover-orange: rgb(255, 100, 0);
 }

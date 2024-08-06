@@ -26,7 +26,7 @@ export default function LoginForm({ redirectTo }: { redirectTo: string }) {
           <CommandLineSvg />
           &nbsp;OnBoarding
         </div>
-        <form className="form-input" onSubmit={onSignIn}>
+        <form className="orange-top-form-header" onSubmit={onSignIn}>
           <div className="p-5 form-header">Log In</div>
           {loginState === LOGIN_STATE.error && (
             <div className="login-form-error">

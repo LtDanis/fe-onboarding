@@ -35,8 +35,11 @@ export default function UserDelete() {
   const cancelAction = () => navigate(USERS_LIST_URL)
 
   return (
-    <>
-      <div className="p-5 form-header">
+    <div className="flex flex-col flex-grow m-5">
+      <div className="header">
+        {(user && user.name) || "-"} {(user && user.surname) || "-"}
+      </div>
+      <div className="p-3 orange-top-form-header">
         Are you sure you want to delete user
         <b>
           &nbsp;
@@ -44,16 +47,18 @@ export default function UserDelete() {
         </b>
         ?
       </div>
-      <div className="wrap">
-        <button onClick={deleteUser} className="submit-button">
-          Delete User
-        </button>
+      <div className="flex flex-row">
+        <div>
+          <button onClick={deleteUser} className="caution-button">
+            Delete User
+          </button>
+        </div>
+        <div>
+          <button onClick={cancelAction} className="cancel-button">
+            Cancel
+          </button>
+        </div>
       </div>
-      <div className="wrap">
-        <button onClick={cancelAction} className="cancel-button">
-          Cancel
-        </button>
-      </div>
-    </>
+    </div>
   )
 }

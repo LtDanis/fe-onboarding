@@ -1,7 +1,27 @@
+.header {
+    font-size: 2rem;
+}
+
+
+.column-header {
+    font-weight: bold;
+}
+
+.column-header:hover {
+    background-color: white !important;
+}
+
 .users-list {
     display: flex;
     flex: 1;
     flex-flow: row nowrap;
+    margin: 15px 20px;
+
+    border-style: solid;
+    border-color: var(--darkgrey);
+    border-top-color: var(--main-orange);
+    border-width: 1px;
+    border-top-width: 2px;
 }
 
 .list-header {
@@ -13,6 +33,7 @@
 }
 
 .user-item {
+    padding: 5px;
     border-color: var(--lightgray);
     border-bottom-width: thin;
 }
@@ -25,12 +46,13 @@
     padding: 5px;
 }
 
-.paginate * {
-    background-color: var(--lightgray);
-    padding: 3px;
+.paginate > li {
+    border-width: 1px;
+    border-color: var(--darkgrey);
+    padding: 2px 8px;
     margin: 2px;
 }
 
 .paginate > .selected {
-    background-color: var(--darkgrey);
+    background-color: var(--lightgray);
 }

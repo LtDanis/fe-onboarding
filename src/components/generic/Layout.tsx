@@ -1,5 +1,5 @@
 import "./Layout.css"
-import { Link, Outlet, useNavigate } from "react-router-dom"
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom"
 import { useEffect } from "react"
 import CommandLineSvg from "../../assets/CommandLine.tsx"
 import UserSvg from "../../assets/User.tsx"
@@ -19,6 +19,7 @@ import useLoginStore from "../../hooks/store/useLoginStore.tsx"
 
 export default function Layout() {
   const navigate = useNavigate()
+  const location = useLocation()
   const { handleLogout } = useLogin()
   const { token } = useLoginStore()
   const { userState, updateUserState } = useUserStore()
@@ -43,7 +44,10 @@ export default function Layout() {
             </div>
             <ul>
               <li>
-                <Link to={USERS_LIST_URL} className="flex flex-row menu-item">
+                <Link
+                  to={USERS_LIST_URL}
+                  className={`flex flex-row menu-item ${location.pathname.startsWith(USERS_LIST_URL) && "selected"}`}
+                >
                   <UserSvg />
                   &nbsp;Users
                 </Link>
@@ -51,7 +55,7 @@ export default function Layout() {
               <li>
                 <Link
                   to={DEPARTMENTS_LIST_URL}
-                  className="flex flex-row menu-item"
+                  className={`flex flex-row menu-item ${location.pathname.startsWith(DEPARTMENTS_LIST_URL) && "selected"}`}
                 >
                   <FriendsSvg />
                   &nbsp;Departments
@@ -60,7 +64,7 @@ export default function Layout() {
               <li>
                 <Link
                   to={POSITIONS_LIST_URL}
-                  className="flex flex-row menu-item"
+                  className={`flex flex-row menu-item ${location.pathname.startsWith(POSITIONS_LIST_URL) && "selected"}`}
                 >
                   <PositionSvg />
                   &nbsp;Positions

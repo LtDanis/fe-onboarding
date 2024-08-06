@@ -5,9 +5,13 @@ import UserForm from "./UserForm.tsx"
 export default function UserRegister() {
   const { onUserRegister } = useUserUpdate()
   return (
-    <>
-      <h1>New User</h1>
-      <UserForm onSubmitForm={onUserRegister} user={null} />
-    </>
+    <div className="flex flex-col flex-1">
+      <div className="flex flex-row list-header">
+        <div className="header">New user</div>
+      </div>
+      <div className="m-5">
+        <UserForm onSubmitForm={onUserRegister} user={null} />
+      </div>
+    </div>
   )
 }
