@@ -74,111 +74,109 @@ export default function UserForm({
             </div>
           </div>
 
-          {generalInfoSelected ? (
-            <div className="flex flex-row">
-              <div className="flex-grow">
-                <div className="p-5">
-                  {user && <label htmlFor="name">Name</label>}
-                  <input
-                    className="w-full"
-                    type="text"
-                    id="name"
-                    name="name"
-                    placeholder="Name"
-                    value={userName}
-                    onChange={(e) => setUserName(e.target.value)}
-                    required
-                    autoComplete="off"
-                  />
-                </div>
-
-                <div className="p-5">
-                  {user && <label htmlFor="surname">Surname</label>}
-                  <input
-                    className="w-full"
-                    type="text"
-                    id="surname"
-                    name="surname"
-                    placeholder="Surname"
-                    value={userSurname}
-                    onChange={(e) => setUserSurname(e.target.value)}
-                    required
-                    autoComplete="off"
-                  />
-                </div>
-
-                <div className="p-5">
-                  {user && <label htmlFor="position">Position</label>}
-                  <select
-                    className={`w-full ${!selectedPosition && !user && "disabled-option"}`}
-                    id="position"
-                    name="position"
-                    required
-                    autoComplete="off"
-                    onChange={setSelectedPos}
-                  >
-                    {!user && (
-                      <option disabled selected value="">
-                        Position
-                      </option>
-                    )}
-                    {positions.map((position: Position) => (
-                      <option value={position.id}>{position.name}</option>
-                    ))}
-                  </select>
-                </div>
-
-                <div className="p-5">
-                  {user && <label htmlFor="department">Department</label>}
-                  <select
-                    className={`w-full ${!selectedDepartment && !user && "disabled-option"}`}
-                    id="department"
-                    name="department"
-                    required
-                    autoComplete="off"
-                    onChange={setSelectedDep}
-                  >
-                    {!user && (
-                      <option disabled selected value="">
-                        Department
-                      </option>
-                    )}
-                    {departments.map((department: Department) => (
-                      <option value={department.id}>{department.name}</option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-
-              <div className="p-5 flex-grow">
-                <label htmlFor="image">
-                  <p>Image</p>
-                  <Avatar image={user?.image} />
-                </label>
+          <div className={`flex flex-row ${!generalInfoSelected && "hidden"}`}>
+            <div className="flex-grow">
+              <div className="p-5">
+                {user && <label htmlFor="name">Name</label>}
                 <input
-                  className="w-full hidden"
-                  type="file"
-                  accept="image/*"
-                  id="image"
-                  name="image"
-                  placeholder="Image"
+                  className="w-full"
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Name"
+                  value={userName}
+                  onChange={(e) => setUserName(e.target.value)}
+                  required
                   autoComplete="off"
                 />
               </div>
+
+              <div className="p-5">
+                {user && <label htmlFor="surname">Surname</label>}
+                <input
+                  className="w-full"
+                  type="text"
+                  id="surname"
+                  name="surname"
+                  placeholder="Surname"
+                  value={userSurname}
+                  onChange={(e) => setUserSurname(e.target.value)}
+                  required
+                  autoComplete="off"
+                />
+              </div>
+
+              <div className="p-5">
+                {user && <label htmlFor="position">Position</label>}
+                <select
+                  className={`w-full ${!selectedPosition && !user && "disabled-option"}`}
+                  id="position"
+                  name="position"
+                  required
+                  autoComplete="off"
+                  onChange={setSelectedPos}
+                >
+                  {!user && (
+                    <option disabled selected value="">
+                      Position
+                    </option>
+                  )}
+                  {positions.map((position: Position) => (
+                    <option value={position.id}>{position.name}</option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="p-5">
+                {user && <label htmlFor="department">Department</label>}
+                <select
+                  className={`w-full ${!selectedDepartment && !user && "disabled-option"}`}
+                  id="department"
+                  name="department"
+                  required
+                  autoComplete="off"
+                  onChange={setSelectedDep}
+                >
+                  {!user && (
+                    <option disabled selected value="">
+                      Department
+                    </option>
+                  )}
+                  {departments.map((department: Department) => (
+                    <option value={department.id}>{department.name}</option>
+                  ))}
+                </select>
+              </div>
             </div>
-          ) : (
-            <div className="p-5">
-              {user && <label htmlFor="comment">Comments</label>}
+
+            <div className="p-5 flex-grow">
+              <label htmlFor="image">
+                <p>Image</p>
+                <Avatar image={user?.image} />
+              </label>
               <input
-                className="w-full"
-                type="text"
-                id="comment"
-                name="comment"
-                placeholder="Comments"
+                className="w-full hidden"
+                type="file"
+                accept="image/*"
+                id="image"
+                name="image"
+                placeholder="Image"
                 autoComplete="off"
               />
             </div>
-          )}
+          </div>
+
+          <div className={`p-5 ${generalInfoSelected && "hidden"}`}>
+            {user && <label htmlFor="comment">Comments</label>}
+            <input
+              className="w-full"
+              type="text"
+              id="comment"
+              name="comment"
+              placeholder="Comments"
+              autoComplete="off"
+            />
+          </div>
 
           <div className="flex flex-row">
             <div className="wrap">
