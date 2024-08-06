@@ -1,0 +1,21 @@
+.departments-list {
+    display: flex;
+    flex-flow: row nowrap;
+    margin: 15px 20px;
+
+    border-style: solid;
+    border-color: var(--darkgrey);
+    border-top-color: var(--main-orange);
+    border-width: 1px;
+    border-top-width: 2px;
+}
+
+.department-item {
+    padding: 5px;
+    border-color: var(--lightgray);
+    border-bottom-width: thin;
+}
+
+.department-item:hover {
+    background-color: var(--lightgray);
+}

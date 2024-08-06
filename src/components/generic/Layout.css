@@ -45,3 +45,23 @@
     border-top-width: 2px;
     border-top-color: var(--main-orange);
 }
+
+.header {
+    font-size: 2rem;
+}
+
+.column-header {
+    font-weight: bold;
+}
+
+.column-header:hover {
+    background-color: white !important;
+}
+
+.list-header {
+    padding: 5px;
+}
+
+.align-right {
+    margin-left: auto;
+}

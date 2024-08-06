@@ -39,16 +39,21 @@ export default function DepartmentEdit() {
     navigate(DEPARTMENTS_LIST_URL)
   }
   return (
-    <>
-      <p>{(department && department.name) || "-"}</p>
-      <div className="wrap">
-        <button onClick={deleteDepartment} className="submit-button">
+    <div className="flex flex-col flex-1">
+      <div className="flex flex-row list-header">
+        <div className="header">{department?.name || "-"}</div>
+        <button
+          onClick={deleteDepartment}
+          className="cancel-button align-right"
+        >
           Delete Department
         </button>
       </div>
-      {department && (
-        <DepartmentForm onSubmitForm={onSubmitForm} department={department} />
-      )}
-    </>
+      <div className="m-5">
+        {department && (
+          <DepartmentForm onSubmitForm={onSubmitForm} department={department} />
+        )}
+      </div>
+    </div>
   )
 }

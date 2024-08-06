@@ -22,48 +22,62 @@ export default function DepartmentForm({
 
   return (
     <>
-      <form className="orange-top-form-header" onSubmit={onSubmitForm}>
-        <div className="p-5 form-header">
-          <button type="button" onClick={selectGeneralInfo}>
-            General information
-          </button>
-        </div>
-        <div className="p-5 form-header">
-          <button type="button" onClick={selectUserList}>
-            Users
-          </button>
+      <form className="form-header" onSubmit={onSubmitForm}>
+        <div className="flex flex-row">
+          <div
+            className={`p-5 form-header ${!usersListSelected && "orange-top-form-header"}`}
+          >
+            <button type="button" onClick={selectGeneralInfo}>
+              General information
+            </button>
+          </div>
+          <div
+            className={`p-5 form-header ${usersListSelected && "orange-top-form-header"} ${!department && "hidden"}`}
+          >
+            <button type="button" onClick={selectUserList}>
+              Users
+            </button>
+          </div>
         </div>
 
         {department && usersListSelected ? (
           <UserList userListUrl={`/api/department/${department.id}/user`} />
         ) : (
           <>
-            <div className="p-5">
-              <input
-                className="w-full"
-                type="text"
-                id="name"
-                name="name"
-                placeholder="Name"
-                value={departmentName}
-                required
-                onChange={(e) => setDepartmentName(e.target.value)}
-              />
+            <div className="flex flex-row">
+              <div className="flex-grow">
+                <div className="p-5">
+                  {department && <label htmlFor="name">Name</label>}
+                  <input
+                    className="w-full"
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Name"
+                    value={departmentName}
+                    onChange={(e) => setDepartmentName(e.target.value)}
+                    required
+                    autoComplete="off"
+                  />
+                </div>
+              </div>
             </div>
 
-            <div className="wrap">
-              <button type="submit" className="submit-button">
-                Save
-              </button>
-            </div>
-            <div className="wrap">
-              <button
-                type="button"
-                onClick={cancelAction}
-                className="cancel-button"
-              >
-                Cancel
-              </button>
+            <div className="flex flex-row">
+              <div className="wrap">
+                <button type="submit" className="submit-button">
+                  Save
+                </button>
+              </div>
+              <div className="wrap">
+                <button
+                  type="button"
+                  onClick={cancelAction}
+                  className="cancel-button"
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
           </>
         )}

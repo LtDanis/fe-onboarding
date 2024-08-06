@@ -1,16 +1,3 @@
-.header {
-    font-size: 2rem;
-}
-
-
-.column-header {
-    font-weight: bold;
-}
-
-.column-header:hover {
-    background-color: white !important;
-}
-
 .users-list {
     display: flex;
     flex: 1;
@@ -22,14 +9,6 @@
     border-top-color: var(--main-orange);
     border-width: 1px;
     border-top-width: 2px;
-}
-
-.list-header {
-    padding: 5px;
-}
-
-.align-right {
-    margin-left: auto;
 }
 
 .user-item {

@@ -59,7 +59,9 @@ export default function UserList({ userListUrl }: { userListUrl?: string }) {
         <div className="text-gray-600">Loading...</div>
       ) : (
         <div className="flex flex-col flex-1">
-          <div className="flex flex-row list-header">
+          <div
+            className={`flex flex-row list-header ${userListUrl && "hidden"}`}
+          >
             <div className="content-evenly header">Users</div>
             <Link className="align-right submit-button" to={USERS_REGISTER_URL}>
               New user

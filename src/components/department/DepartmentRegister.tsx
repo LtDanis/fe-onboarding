@@ -6,8 +6,17 @@ export default function DepartmentRegister() {
   const { onDepartmentRegister } = useDepartmentUpdate()
   return (
     <>
-      <h1>New Department</h1>
-      <DepartmentForm onSubmitForm={onDepartmentRegister} department={null} />
+      <div className="flex flex-col flex-1">
+        <div className="flex flex-row list-header">
+          <div className="header">New department</div>
+        </div>
+        <div className="m-5">
+          <DepartmentForm
+            onSubmitForm={onDepartmentRegister}
+            department={null}
+          />
+        </div>
+      </div>
     </>
   )
 }
