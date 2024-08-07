@@ -8,9 +8,10 @@ import {
   DEPARTMENTS_EDIT_URL_WITH_ID,
   DEPARTMENTS_REGISTER_URL,
 } from "../../data/constants.tsx"
-import { Link } from "react-router-dom"
+import { Link, useOutletContext } from "react-router-dom"
 
 export default function DepartmentList() {
+  const context: any = useOutletContext()
   const [pageState, setPageState] = useState(PAGE_STATE.loading)
   const [departments, setDepartments] = useState<Department[]>([])
   const { onFetch } = useFetch()
@@ -33,6 +34,7 @@ export default function DepartmentList() {
       ) : (
         <div className="flex flex-col flex-1">
           <div className="flex flex-row list-header">
+            <div>{context.hamburgerMenu}</div>
             <div className="content-evenly header">Departments</div>
             <Link
               className="align-right submit-button"

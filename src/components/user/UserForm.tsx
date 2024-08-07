@@ -53,6 +53,24 @@ export default function UserForm({
   const setSelectedDep = () => setSelectedDepartment(true)
   const setSelectedPos = () => setSelectedPosition(true)
 
+  const imageInput = (cssClassName: string) => (
+    <div className={cssClassName}>
+      <label className="label-text" htmlFor="image">
+        <p>Image</p>
+        <Avatar image={user?.image} />
+      </label>
+      <input
+        className="w-full hidden"
+        type="file"
+        accept="image/*"
+        id="image"
+        name="image"
+        placeholder="Image"
+        autoComplete="off"
+      />
+    </div>
+  )
+
   return (
     <>
       {pageState === PAGE_STATE.completed ? (
@@ -66,7 +84,7 @@ export default function UserForm({
               </button>
             </div>
             <div
-              className={`p-5 form-header ${!generalInfoSelected && "orange-top-form-header"}`}
+              className={`p-5 form-header desktop-only ${!generalInfoSelected && "orange-top-form-header"}`}
             >
               <button type="button" onClick={selectComments}>
                 Comments
@@ -77,7 +95,11 @@ export default function UserForm({
           <div className={`flex flex-row ${!generalInfoSelected && "hidden"}`}>
             <div className="flex-grow">
               <div className="p-5">
-                {user && <label htmlFor="name">Name</label>}
+                {user && (
+                  <label className="label-text" htmlFor="name">
+                    Name
+                  </label>
+                )}
                 <input
                   className="w-full"
                   type="text"
@@ -92,7 +114,11 @@ export default function UserForm({
               </div>
 
               <div className="p-5">
-                {user && <label htmlFor="surname">Surname</label>}
+                {user && (
+                  <label className="label-text" htmlFor="surname">
+                    Surname
+                  </label>
+                )}
                 <input
                   className="w-full"
                   type="text"
@@ -107,7 +133,11 @@ export default function UserForm({
               </div>
 
               <div className="p-5">
-                {user && <label htmlFor="position">Position</label>}
+                {user && (
+                  <label className="label-text" htmlFor="position">
+                    Position
+                  </label>
+                )}
                 <select
                   className={`w-full ${!selectedPosition && !user && "disabled-option"}`}
                   id="position"
@@ -128,7 +158,11 @@ export default function UserForm({
               </div>
 
               <div className="p-5">
-                {user && <label htmlFor="department">Department</label>}
+                {user && (
+                  <label className="label-text" htmlFor="department">
+                    Department
+                  </label>
+                )}
                 <select
                   className={`w-full ${!selectedDepartment && !user && "disabled-option"}`}
                   id="department"
@@ -147,27 +181,17 @@ export default function UserForm({
                   ))}
                 </select>
               </div>
+              {imageInput("p-5 mobile-only")}
             </div>
-
-            <div className="p-5 flex-grow">
-              <label htmlFor="image">
-                <p>Image</p>
-                <Avatar image={user?.image} />
-              </label>
-              <input
-                className="w-full hidden"
-                type="file"
-                accept="image/*"
-                id="image"
-                name="image"
-                placeholder="Image"
-                autoComplete="off"
-              />
-            </div>
+            {imageInput("p-5 flex-grow desktop-only")}
           </div>
 
-          <div className={`p-5 ${generalInfoSelected && "hidden"}`}>
-            {user && <label htmlFor="comment">Comments</label>}
+          <div className={`p-5 ${generalInfoSelected && "mobile-only"}`}>
+            {user && (
+              <label className="label-text" htmlFor="comment">
+                Comments
+              </label>
+            )}
             <input
               className="w-full"
               type="text"

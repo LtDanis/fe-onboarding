@@ -1,5 +1,5 @@
 import "./UserDelete.css"
-import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useOutletContext, useParams } from "react-router-dom"
 import useFetch from "../../hooks/useFetch.tsx"
 import { useEffect, useState } from "react"
 import { User } from "../../data/classes.tsx"
@@ -11,6 +11,7 @@ export default function UserDelete() {
   const [user, setUser] = useState<User | null>(null)
   const params = useParams()
   const navigate = useNavigate()
+  const context: any = useOutletContext()
   const { updateUserState } = useUserStore()
   const { onFetch } = useFetch()
 
@@ -36,8 +37,11 @@ export default function UserDelete() {
 
   return (
     <div className="flex flex-col flex-grow m-5">
-      <div className="header">
-        {(user && user.name) || "-"} {(user && user.surname) || "-"}
+      <div className="flex flex-row">
+        <div>{context.hamburgerMenu}</div>
+        <div className="header">
+          {(user && user.name) || "-"} {(user && user.surname) || "-"}
+        </div>
       </div>
       <div className="p-3 orange-top-form-header">
         Are you sure you want to delete user

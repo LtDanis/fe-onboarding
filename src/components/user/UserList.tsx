@@ -1,5 +1,5 @@
 import "./UserList.css"
-import { Link } from "react-router-dom"
+import { Link, useOutletContext } from "react-router-dom"
 import { useEffect, useState } from "react"
 import { Department, Position, User } from "../../data/classes.tsx"
 import useFetch from "../../hooks/useFetch.tsx"
@@ -20,6 +20,8 @@ export default function UserList({ userListUrl }: { userListUrl?: string }) {
   const [departments, setDepartments] = useState<Department[]>([])
   const [positions, setPositions] = useState<Position[]>([])
   const { onFetch, onFetchPage } = useFetch()
+  const context: any = useOutletContext()
+
   const defaultUserListUrl = "/api/user"
 
   useEffect(() => {
@@ -55,66 +57,82 @@ export default function UserList({ userListUrl }: { userListUrl?: string }) {
 
   return (
     <>
-      {pageState === PAGE_STATE.loading ? (
-        <div className="text-gray-600">Loading...</div>
-      ) : (
-        <div className="flex flex-col flex-1">
-          <div
-            className={`flex flex-row list-header ${userListUrl && "hidden"}`}
-          >
-            <div className="content-evenly header">Users</div>
-            <Link className="align-right submit-button" to={USERS_REGISTER_URL}>
-              New user
-            </Link>
-          </div>
-          <div className="users-list flex-col">
-            {hasUsers && (
-              <div className="grid grid-cols-6 user-item column-header">
-                <div>Photo</div>
-                <div>Name</div>
-                <div>Surname</div>
-                <div>Position</div>
-                <div>Department</div>
-                <div>Comments</div>
-              </div>
-            )}
-            {hasUsers ? (
-              users.map((user: User) => (
-                <Link
-                  className="min-w-full flex-1 content-evenly user-item"
-                  to={USERS_EDIT_URL_WITH_ID(user.id)}
-                >
-                  <div className="grid grid-cols-6">
-                    <Avatar image={user?.image} width={25} height={25} />
-                    <div>{user.surname}</div>
-                    <div>{user.name}</div>
-                    <div>{findPosition(user.positionId)}</div>
-                    <div>{findDepartment(user.departmentId)}</div>
-                    <div>{user.comment}</div>
-                  </div>
-                </Link>
-              ))
-            ) : (
-              <>
-                <div>There are no data to show currently.</div>
-                <Link className="text-orange-600" to={USERS_REGISTER_URL}>
-                  Create new user.
-                </Link>
-              </>
-            )}
-          </div>
-          <ReactPaginate
-            className="flex paginate"
-            breakLabel="..."
-            nextLabel=">"
-            onPageChange={handlePageClick}
-            pageRangeDisplayed={4}
-            pageCount={numberOfPages}
-            previousLabel="<"
-            renderOnZeroPageCount={null}
-          />
+      <div className="flex flex-col flex-1">
+        <div className={`flex flex-row list-header ${userListUrl && "hidden"}`}>
+          <div>{context.hamburgerMenu}</div>
+          <div className="content-evenly header">Users</div>
+          <Link className="align-right submit-button" to={USERS_REGISTER_URL}>
+            New user
+          </Link>
         </div>
-      )}
+        {pageState === PAGE_STATE.loading ? (
+          <div className="text-gray-600">Loading...</div>
+        ) : (
+          <>
+            <div className="users-list flex-col">
+              {hasUsers && (
+                <div className="grid grid-cols-6 user-item column-header desktop-only">
+                  <div>Photo</div>
+                  <div>Name</div>
+                  <div>Surname</div>
+                  <div>Position</div>
+                  <div>Department</div>
+                  <div>Comments</div>
+                </div>
+              )}
+              {hasUsers ? (
+                users.map((user: User) => (
+                  <Link
+                    className="min-w-full flex-1 content-evenly user-item"
+                    to={USERS_EDIT_URL_WITH_ID(user.id)}
+                  >
+                    <div className="grid grid-cols-6 desktop-only">
+                      <Avatar image={user?.image} width={25} height={25} />
+                      <div>{user.name}</div>
+                      <div>{user.surname}</div>
+                      <div>{findPosition(user.positionId)}</div>
+                      <div>{findDepartment(user.departmentId)}</div>
+                      <div>{user.comment}</div>
+                    </div>
+
+                    <div className="grid grid-cols-1 mobile-only">
+                      <div className="flex flex-row">
+                        <Avatar image={user?.image} width={25} height={25} />
+                        <div className="flex flex-col">
+                          <div className="pl-3">
+                            {user.name} {user.surname}
+                          </div>
+                          <div className="pl-3 label-text">
+                            {findPosition(user.positionId)} /{" "}
+                            {findDepartment(user.departmentId)}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                ))
+              ) : (
+                <>
+                  <div>There are no data to show currently.</div>
+                  <Link className="text-orange-600" to={USERS_REGISTER_URL}>
+                    Create new user.
+                  </Link>
+                </>
+              )}
+            </div>
+            <ReactPaginate
+              className="flex paginate"
+              breakLabel="..."
+              nextLabel=">"
+              onPageChange={handlePageClick}
+              pageRangeDisplayed={4}
+              pageCount={numberOfPages}
+              previousLabel="<"
+              renderOnZeroPageCount={null}
+            />
+          </>
+        )}
+      </div>
     </>
   )
 }

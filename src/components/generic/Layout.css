@@ -1,6 +1,6 @@
 .menu-bar {
-    min-height: inherit;
-    min-width: 200px;
+    height: 100%;
+    min-width: 250px;
     background-color: rgba(0, 0, 0, 0.95);
     color: rgba(255, 255, 255, 0.9);
 }
@@ -64,4 +64,8 @@
 
 .align-right {
     margin-left: auto;
+}
+
+.negative-margin-hamburger-button {
+    margin: -10px -10px -10px auto;
 }

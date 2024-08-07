@@ -1,7 +1,7 @@
 import "./DepartmentEdit.css"
 import { FormEventHandler, useEffect, useState } from "react"
 import { Department } from "../../data/classes.tsx"
-import { useNavigate, useParams } from "react-router-dom"
+import { useNavigate, useOutletContext, useParams } from "react-router-dom"
 import useFetch from "../../hooks/useFetch.tsx"
 import DepartmentForm from "./DepartmentForm.tsx"
 import { DEPARTMENTS_LIST_URL } from "../../data/constants.tsx"
@@ -13,6 +13,7 @@ export default function DepartmentEdit() {
   const [department, setDepartment] = useState<Department | null>(null)
   const params = useParams()
   const navigate = useNavigate()
+  const context: any = useOutletContext()
   const { updateDepartmentState } = useDepartmentStore()
   const { onDepartmentEdit } = useDepartmentUpdate()
   const { onFetch } = useFetch()
@@ -41,6 +42,7 @@ export default function DepartmentEdit() {
   return (
     <div className="flex flex-col flex-1">
       <div className="flex flex-row list-header">
+        <div>{context.hamburgerMenu}</div>
         <div className="header">{department?.name || "-"}</div>
         <button
           onClick={deleteDepartment}

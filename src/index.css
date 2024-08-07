@@ -9,7 +9,7 @@
 
 body {
     min-width: 100%;
-    min-height: 100vh;
+    height: 100dvh;
     caret-color: transparent;
 }
 
@@ -18,15 +18,30 @@ input {
     border-bottom: 1px var(--darkgrey) solid;
 }
 
-label {
-    font-size: 0.7rem;
-    color: var(--darkgrey)
-}
-
 select {
     border-bottom: 1px var(--darkgrey) solid;
 }
 
 .disabled-option {
     color: var(--darkgrey);
+}
+
+@media only screen and (min-width: 600px) {
+    .mobile-only {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .menu-bar {
+        min-width: 90%;
+    }
+    .desktop-only {
+        display: none;
+    }
+}
+
+.label-text {
+    font-size: 0.7rem;
+    color: var(--darkgrey)
 }

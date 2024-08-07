@@ -1,5 +1,10 @@
 import "./UserEdit.css"
-import { Link, useNavigate, useParams } from "react-router-dom"
+import {
+  Link,
+  useNavigate,
+  useOutletContext,
+  useParams,
+} from "react-router-dom"
 import {
   USERS_DELETE_URL_WITH_ID,
   USERS_LIST_URL,
@@ -14,6 +19,7 @@ export default function UserEdit() {
   const [user, setUser] = useState<User | null>(null)
   const params = useParams()
   const navigate = useNavigate()
+  const context: any = useOutletContext()
   const { onUserEdit } = useUserUpdate()
   const { onFetch } = useFetch()
 
@@ -35,6 +41,7 @@ export default function UserEdit() {
   return (
     <div className="flex flex-col flex-1">
       <div className="flex flex-row list-header">
+        <div>{context.hamburgerMenu}</div>
         <div className="header">
           {(user && user.name) || "-"} {(user && user.surname) || "-"}
         </div>

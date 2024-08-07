@@ -47,7 +47,11 @@ export default function DepartmentForm({
             <div className="flex flex-row">
               <div className="flex-grow">
                 <div className="p-5">
-                  {department && <label htmlFor="name">Department name</label>}
+                  {department && (
+                    <label className="label-text" htmlFor="name">
+                      Department name
+                    </label>
+                  )}
                   <input
                     className="w-full"
                     type="text"
