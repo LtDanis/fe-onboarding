@@ -47,13 +47,13 @@ export default function DepartmentForm({
             <div className="flex flex-row">
               <div className="flex-grow">
                 <div className="p-5">
-                  {department && <label htmlFor="name">Name</label>}
+                  {department && <label htmlFor="name">Department name</label>}
                   <input
                     className="w-full"
                     type="text"
                     id="name"
                     name="name"
-                    placeholder="Name"
+                    placeholder="Department name"
                     value={departmentName}
                     onChange={(e) => setDepartmentName(e.target.value)}
                     required
